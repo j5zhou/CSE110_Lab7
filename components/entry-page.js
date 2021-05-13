@@ -102,6 +102,7 @@ class EntryPage extends HTMLElement {
   }
 
   set entry(entry) {
+    console.log(entry.title);
     this.shadowRoot.querySelector('.entry-title').innerText = entry.title;
     this.shadowRoot.querySelector('.entry-date').innerText = entry.date;
     this.shadowRoot.querySelector('.entry-content').innerText = entry.content;
