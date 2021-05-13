@@ -4,6 +4,22 @@ import { router } from './router.js'; // Router imported so you can use it to ma
 const setState = router.setState;
 
 // Make sure you register your service worker here too
+
+ //register the service worker
+ if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+
+
     //added
     let setting = document.getElementsByTagName("img")[0];
     let main = document.querySelector('main');
@@ -73,9 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('popstate', (event) => {
 
-    console.log(event.state);
-    console.log(window.location);
-
     //home page
     if(!event.state||event.state.index==0){
       main.style.display ="block";
@@ -104,7 +117,7 @@ window.addEventListener('popstate', (event) => {
       //changing the title
       let entry_title = window.location.hash.substr(6);
       title.innerText="Entry " + entry_title;
-      
+
       body.classList.remove("settings");
       
       //delete the old entry page
